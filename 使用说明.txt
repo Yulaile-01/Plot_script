@@ -1,0 +1,14 @@
+该python文件为up自己编写，有bug请联系我。此外，恳请切勿用于商用用途，本人不对数据处理中可能存在的错误负责，仅允许学习交流之用！
+
+使用步骤
+	安装 numpy pandas pyqt5 originpro scipy matplotlib seaborn
+	将HeatMap2.otp 复制到origin的模拟文件路径       一般默认路径在个人目录下的Documents\OriginLab\User Files
+	
+	1 终端运行 python3 my_mapping_v3.py 
+	2 文件对话框选择80K NEW MAPING.CSV
+
+	3 弹出 show top peek  寻找峰的个数 一般为2
+	2 然后弹出要求输入的xy轴截取范围， 这里可以直接输入 p1 代表第一个峰 白色线条所围成的范围
+	3 然后grid_num 输入0 即可，此功能在496行注释掉了，对绘制origin图没有影响
+	4 弹出open origin is 输入1 代表打开originpro 模块绘制Origin文件， 输入0  代表重新从步骤3 开始
+	5 终端打印的 max_peek XXX XXX 代表峰的Y轴和X轴的坐标值
