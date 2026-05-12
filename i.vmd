@@ -1,0 +1,60 @@
+
+proc orb {iorb} {
+#Set the isovalue for showing orbitals here. 0.02~0.06 is commonly used.
+set isoval 0.05
+#Set the material for showing orbitals here. Glossy and EdgyGlass are recommended.
+set mater Glossy
+light 3 on
+
+color Display Background white
+display depthcue off
+display rendermode GLSL
+axes location Off
+if {[molinfo num]>0} {
+set viewpoint [molinfo top get {center_matrix rotate_matrix scale_matrix}]
+}
+mol delete top
+mol new $iorb
+mol modstyle 0 top CPK 0.800000 0.300000 22.000000 22.000000
+mol addrep top
+mol modstyle 1 top Isosurface $isoval 0 0 0 1 1
+mol modcolor 1 top ColorID 1
+mol modmaterial 1 top $mater
+mol addrep top
+mol modstyle 2 top Isosurface -$isoval 0 0 0 1 1
+mol modcolor 2 top ColorID 0
+mol modmaterial 2 top $mater
+if [info exists viewpoint] {
+molinfo top set {center_matrix rotate_matrix scale_matrix} $viewpoint
+}
+}
+
+
+proc renderx {} {
+color Name C tan
+color change rgb tan 0.700000 0.560000 0.360000
+material change mirror Opaque 0.15
+material change outline Opaque 4.000000
+material change outlinewidth Opaque 0.5
+material change ambient Glossy 0.1
+material change diffuse Glossy 0.600000
+material change opacity Glossy 0.75
+material change shininess Glossy 1.0
+mol modcolor 1 top ColorID 12
+mol modcolor 2 top ColorID 22
+display distance -7.0
+display height 10
+light 3 on
+
+
+}
+
+
+proc orbiso {isoval} {
+mol modstyle 1 top Isosurface $isoval 0 0 0 1 1
+mol modstyle 2 top Isosurface -$isoval 0 0 0 1 1
+}
+
+proc orbclean {} {
+file delete {*}[glob orb*.cub]
+}
